@@ -49,7 +49,7 @@ public class myworktest {
 		@Test
 	   public void test() {
 		Mywork m=new Mywork();
-		distances=m.findClosestShops(12, 111, coffeeShops);
+		distances=m.calculateDistances(12, 111, coffeeShops);
 	   }
 		
 		@After

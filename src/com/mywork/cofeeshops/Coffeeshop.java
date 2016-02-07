@@ -1,6 +1,8 @@
 package com.mywork.cofeeshops;
 
 public class Coffeeshop {
+	
+	//local variables for name, x and y
     private String name;
     private double xCoordinate;
     private double yCoordinate;

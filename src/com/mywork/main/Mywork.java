@@ -24,6 +24,9 @@ public class Mywork {
 		        System.exit(0);
 		    }
 		
+		  /*
+		   * Get the command line arguments
+		   */
 		double userXCoordinate = Double.parseDouble(args[0]);
 		double useryCoordinate = Double.parseDouble(args[1]);
 		String inputCsv = args[2];
@@ -31,11 +34,14 @@ public class Mywork {
 		
 		List<Coffeeshop> coffeeShops;
 			
+		//Parse the input csv and update the list with coffeeshop DAO objects
 		coffeeShops = parseCSVFile(inputCsv);
 		
-		TreeMap<Double, String> distances=findClosestShops(userXCoordinate,useryCoordinate,coffeeShops);
-
 		
+		//Treemap to store sorted list
+		TreeMap<Double, String> distances=calculateDistances(userXCoordinate,useryCoordinate,coffeeShops);
+		
+		//print the output based on number of output required
 		for(Entry<Double, String> entry : distances.entrySet()){
 			System.out.println(entry.getValue() + "," + entry.getKey());
 			if(--resultCount<1){
@@ -43,8 +49,13 @@ public class Mywork {
 			}
 		}
 	}
+
 	
-	public static TreeMap findClosestShops(double userXCoordinate,double useryCoordinate, List<Coffeeshop> coffeeShops){
+	/*
+	 * Method to find the distance between the user and the given coffee shops
+	 * Returns a map of distance between the user and a coffeshop
+	 */
+	public static TreeMap calculateDistances(double userXCoordinate,double useryCoordinate, List<Coffeeshop> coffeeShops){
 		
 		TreeMap<Double, String> distancesList = new TreeMap<Double, String>();
 		
@@ -52,11 +63,13 @@ public class Mywork {
 			double distance = findDistance(cshop.getxCoordinate(), cshop.getyCoordinate(), userXCoordinate, useryCoordinate);
 			distancesList.put(distance, cshop.getName());
 		}
-		
-		return distancesList;
-		
+		return distancesList;	
 	}
 	
+	/*
+	 * Reads the csv file and populates our coffeeshop objects
+	 * 
+	 */
 	private static List<Coffeeshop> parseCSVFile(String csvfile) throws IOException {
         //create CSVReader object
         CSVReader reader = new CSVReader(new FileReader(csvfile), ',');
@@ -89,6 +102,14 @@ public class Mywork {
 //        System.out.println(cshops);
         return cshops;
     }
+	
+	/*
+	 * Method to calculate the distance between two point on a single plane
+	 * sqrt(
+	 * 		(x1-x2)^2 
+	 * 		+(y1 -y2)^2
+	 * 		)
+	 */
 	
 	private static double findDistance(double x1,double y1,double x2,double y2){
 		return Math.sqrt(
