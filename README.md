@@ -10,4 +10,4 @@ $ cd Coffeeshop
 
 $ cd target
 
-$ java -jar myWork-0.0.1-SNAPSHOT-jar-with-dependencies.jar <x-coordinate> <y-coordinate> <CSV file>
+$ java -jar myWork-0.0.1-SNAPSHOT-jar-with-dependencies.jar [x-coordinate] [y-coordinate] [CSV file]
